@@ -1,0 +1,32 @@
+version: '3'
+services:
+
+  dashboard:
+    build: dashboard
+    ports:
+      - "29999:29999"
+
+  data_harvester:
+    build: data_harvester
+    ports:
+      - "5000:5000"
+
+  postgres:
+    build: postgres
+    container_name: postgres_db
+    env_file:
+      - postgres/postgres_statics.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - data:/var/lib/postgresql/data/ # persist data even if container shuts down
+  
+  # pgadmin:
+  #   build: pgadmin
+  #   container_name: pgadmin_container
+  #   env_file:
+  #     - pgadmin/pgadmin_statics.env
+  #   ports:
+  #     - "5050:80"
+volumes:
+  data: # named volumes can be managed easier using docker-compose

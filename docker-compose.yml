@@ -11,15 +11,15 @@ services:
     ports:
       - "5000:5000"
 
-  postgres:
-    build: postgres
-    container_name: postgres_db
-    env_file:
-      - postgres/postgres_statics.env
-    ports:
-      - "5432:5432"
-    volumes:
-      - data:/var/lib/postgresql/data/ # persist data even if container shuts down
+  # postgres:
+  #   build: postgres
+  #   container_name: postgres_db
+  #   env_file:
+  #     - postgres/postgres_statics.env
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - data:/var/lib/postgresql/data/ # persist data even if container shuts down
   
   # pgadmin:
   #   build: pgadmin
@@ -28,5 +28,6 @@ services:
   #     - pgadmin/pgadmin_statics.env
   #   ports:
   #     - "5050:80"
+
 volumes:
   data: # named volumes can be managed easier using docker-compose

@@ -1,3 +1,5 @@
 pandas
 yfinance==0.1.54
 Flask==1.1.2
+praw
+tweepy

@@ -1,4 +1,4 @@
-TWITTER_CREDENTIALS: {
+TWITTER_CREDENTIALS = {
     "api_key": "XMEK7V8y3skGqczKYhoWpzJtD",
     "api_key_secret": "qVvyo5tYntN6d91lJ5KLvArJqk2VgrDTpDUlfC7l6ahiEjxD7v",
     "bearer_token": "AAAAAAAAAAAAAAAAAAAAADaRFwEAAAAAf7E73KIhuyk17KIZb5AISfZT%2BDM%3Dnlcn2rpgWlnihQjTOZEI80kcyfnBxwGvPWemGT8PQLOlION59O",
@@ -6,7 +6,7 @@ TWITTER_CREDENTIALS: {
     "access_token_secret": "uJ9EWY50zs8wcOLmnqHPacSQ2WLSkTW4JTa3Wrhj8MzSI",
 }
 
-TWITTER_DATA_FIELDS: [
+TWITTER_DATA_FIELDS = [
     "id_str",
     "created_at",
     "full_text",

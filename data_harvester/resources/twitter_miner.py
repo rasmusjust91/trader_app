@@ -1,7 +1,7 @@
 import tweepy
 import pandas as pd
 
-from data_harvester.resources.twitter_statics import (
+from data_harvester.resources.statics import (
     TWITTER_CREDENTIALS,
     TWITTER_DATA_FIELDS,
 )
@@ -32,11 +32,16 @@ class TweetMiner:
         ).items()
 
         tweets_list = [tweet._json for tweet in tweets]
-        print(tweets_list)
-        if return_type == "pandas":
-            return self.tweets_to_pandas(tweets_list)
-        elif return_type == "json":
-            return tweets_list
+
+        return self.tweets_to_pandas(tweets_list)
+
+    def user_timeline_tweets(self, twitter_user_id, return_type="pandas"):
+        tweets = tweepy.Cursor(
+            self.api.user_timeline, id=twitter_user_id, tweet_mode="extended"
+        ).items()
+        tweets_list = [tweet._json for tweet in tweets]
+
+        return self.tweets_to_pandas(tweets_list)
 
     @staticmethod
     def tweets_to_pandas(json_tweet):
@@ -53,7 +58,10 @@ class TweetMiner:
 
 if __name__ == "__main__":
     tm = TweetMiner()
-    query = "maersk -RT"
-    data_frame = tm.search_tweets(query)
+    # query = "maersk -RT"
+    # query = "from:realDonaldTrump"
+    data_frame = tm.user_timeline_tweets("BorisJohnson")
 
-    data_frame.to_csv("no_retweets.csv")
+    # data_frame = tm.search_tweets(query)
+    # print(data_frame)
+    data_frame.to_csv("no_retweets.csv", sep="|")

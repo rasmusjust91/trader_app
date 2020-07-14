@@ -1,23 +1,45 @@
 from flask import Flask, request
-import json
 
-# from data_harvester.resources.data_harvester import StockDataHarvester
-from .resources.data_harvester import StockDataHarvester
+from resources.data_miner.stock_miner import StockMiner
+
+from resources.utils.io import load_csv_files
+from resources.feature_engineering.text_features import (
+    combine_twitter_and_reddit_data,
+    generate_daily_text_features,
+)
+import os
+
+from resources.statics import TWITTER_DATA_PATH, REDDIT_DATA_PATH
 
 app = Flask(__name__)
 
 
-@app.route("/fetch_data")
-def get_data():
+@app.route("/get_daily_textual_features")
+def get_daily_textual_features():
+    reddit_data = load_csv_files(REDDIT_DATA_PATH)
+    twitter_data = load_csv_files(TWITTER_DATA_PATH)
+
+    data = combine_twitter_and_reddit_data(twitter_data, reddit_data)
+
+    features = generate_daily_text_features(data)
+
+    return {"data": features.to_json()}
+
+
+@app.route("/get_daily_stock_features")
+def get_daily_stock_features():
+
     data = request.get_json(force=True)
 
-    stock = data.get("stock")
+    stocks = data.get("stocks")
     start_date = data.get("start_date")
     end_date = data.get("end_date")
-    dh = StockDataHarvester(stock, start_date, end_date)
-    stock_data = dh.get_daily_stock_data()
-    response = {"data": stock_data.to_json()}
-    return response
+
+    sh = StockMiner(stocks, start_date=start_date, end_date=end_date)
+
+    features = sh.get_daily_stock_data()
+
+    return {"data": features.to_json()}
 
 
 if __name__ == "__main__":

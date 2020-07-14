@@ -1,3 +1,5 @@
+import os
+
 TWITTER_CREDENTIALS = {
     "api_key": "XMEK7V8y3skGqczKYhoWpzJtD",
     "api_key_secret": "qVvyo5tYntN6d91lJ5KLvArJqk2VgrDTpDUlfC7l6ahiEjxD7v",
@@ -35,3 +37,6 @@ REDDIT_DATA_FIELDS = [
     "num_comments",
     "created",
 ]
+
+REDDIT_DATA_PATH = os.path.abspath("resources/data/reddit")
+TWITTER_DATA_PATH = os.path.abspath("resources/data/twitter")

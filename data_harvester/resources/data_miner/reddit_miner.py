@@ -1,7 +1,7 @@
 import praw
 import pandas as pd
 from datetime import datetime
-from data_harvester.resources.statics import REDDIT_CREDENTIALS, REDDIT_DATA_FIELDS
+from resources.statics import REDDIT_CREDENTIALS, REDDIT_DATA_FIELDS
 
 
 class RedditMiner:

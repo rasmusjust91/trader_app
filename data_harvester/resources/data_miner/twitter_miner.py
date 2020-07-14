@@ -1,7 +1,7 @@
 import tweepy
 import pandas as pd
 
-from data_harvester.resources.statics import (
+from resources.statics import (
     TWITTER_CREDENTIALS,
     TWITTER_DATA_FIELDS,
 )

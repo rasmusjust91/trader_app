@@ -1,6 +1,6 @@
 pandas
 yfinance==0.1.54
-Flask==1.1.2
+Flask==2.3.2
 praw
 tweepy
 nltk
